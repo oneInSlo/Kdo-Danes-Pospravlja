@@ -24,7 +24,7 @@
 - 🔄 **Automated Task Rotation**: For recurring tasks, responsibilities can be rotated automatically among the assigned roommates.
 - ⏰ **Task Reminders**: Users responsible for tasks receive email reminders on the scheduled date.
 - 🎨 **Task Status Indicators**: The top border color of each task changes based on the task’s end date to indicate its status.
-- 📅 **Overview and Sorting**: View and sort tasks for each living unit by different parameters such as date, task type, and room.
+- 📅 **Overview and Sorting**: Users can view and sort tasks for each living unit by different parameters such as date, task type, and room.
 
 
 ## 🛠️ Installation
