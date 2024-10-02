@@ -1,0 +1,853 @@
+openapi: '3.0.2'
+info:
+  title: Kdo_Danes_Pospravlja
+  version: '1.0'
+servers:
+  - url: https://localhost:4000/
+paths: 
+  /units/{unit_id}/tasks/onetime:
+    parameters:
+      - in: path
+        name: unit_id
+        required: true
+        schema:
+          type: integer
+
+    get:
+      summary: "Pridobi vsa/moja ENKRATNA opravila vezana na enoto"
+      parameters:
+      - in: query
+        name: responsible
+        required: false
+        schema:
+          type: string
+          enum: [me, all]
+          description: Filter za pridobitev ali vseh opravil vezanih na enoto (all) ali opravil vezanih na enoto za katere je odgovoren trenuten uporabnik (me)
+          default: all
+        
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: 
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                        title:
+                          type: string
+                        duration:
+                          type: integer
+                        room:
+                          type: string
+                        dateAdded:
+                          type: integer
+                          description: UNIX timestamp
+                        lastChange:
+                          type: integer
+                          description: UNIX timestamp
+                        dueDate:
+                          type: integer
+                          description: UNIX timestamp
+                        responsibleUser:
+                          type: integer
+                          description: user_id odgovorne osebe
+      
+        '400':
+          description: Kakrsna koli strukturna napaka
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg: 
+                    type: string
+                    default: "Pravilno izpolnite vsa polja"
+            
+        '403':
+          description: Uporabnik nima dostopa do dodajanja opravil na to enoto
+          content: 
+            application/json:
+              schema:
+                type: object
+                properties: 
+                  msg: 
+                    type: string
+                    default: "Nimate dostopa za ustvarjanje opravil za to enoto"
+        '401': 
+          description: Uporabnik ni poslal JWT / JWT je potekel
+        '500':
+          description: Napaka z podatkovno bazo / napaka na serverju (karkoli za kar ni kriv uporabnik sam)
+          content: 
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg: 
+                    type: string
+                    default: "Napaka na strezniku. Prosim poskusite kasneje."
+    
+    post:
+      summary: "Ustvari NOVO ENKRATNO opravilo in ga pripne na enoto"
+      responses:
+        '200':
+          description: OK - Opravilo je bilo ustvarjeno in dodano na enoto
+        '400':
+          description: Kakrsna koli strukturna napaka
+        '403':
+          description: Uporabnik nima dostopa do dodajanja opravil na to enoto
+        '401': 
+          description: Uporabnik ni poslal JWT / JWT je potekel
+        '404':
+          description: Unit_id ni najden
+        '500':
+          description: Napaka z podatkovno bazo / napaka na serverju (karkoli za kar ni kriv uporabnik sam)
+                    
+  /units/{unit_id}/tasks/repeating: 
+    parameters:
+      - in: path
+        name: unit_id
+        schema:
+          type: integer
+          description: ID enote
+        required: true
+      
+
+          
+    get:
+      summary: "Pridobi vsa/moja PONAVLJAJOCA opravila vezana na enoto"
+      parameters:
+      - in: query
+        name: responsible
+        schema: 
+          type: string
+          default: all
+          enum: [all, me]
+        required: false
+        
+      responses: 
+        '200': 
+          description:  'OK'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: 
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                        title:
+                          type: string
+                        duration:
+                          type: integer
+                        room:
+                          type: string
+                        dateAdded:
+                          type: integer
+                          description: timestamp dodajanja opravila
+                        lastChange:
+                          type: integer
+                          description: timestamp zadnje spremembe na opravilu
+                        dueDate:
+                          type: integer
+                          description: timestamp roka opravila
+                        startDate:
+                          type: integer
+                          description: timestamp zacetka ponavljanja opravila
+                        endDate: 
+                          type: integer
+                          description: timestamp konca ponavljanja opravila
+                        frequency:
+                          type: string
+                          enum: [weekly, yearly, daily, monthly]
+                        responsibleUsers:
+                          type: array
+                          items:
+                            type: integer
+                            description: user_id
+          
+    post:
+      summary: "Ustvari NOVO PONAVLJAJOCE opravilo in ga pripne na enoto"
+      responses:
+        '200':
+          description: OK - Opravilo je bilo ustvarjeno in dodano na enoto
+        '400':
+          description: Kakrsna koli strukturna napaka
+        '403':
+          description: Uporabnik nima dostopa do dodajanja opravil na to enoto
+        '401': 
+          description: Uporabnik ni poslal JWT / JWT je potekel
+        '500':
+          description: Napaka z podatkovno bazo / napaka na serverju (karkoli za kar ni kriv uporabnik sam)
+          
+  /units/{unit_id}/tasks/finished: 
+    parameters:
+      - in: path
+        name: unit_id
+        schema:
+          type: integer
+          description: ID enote
+        required: true
+    
+    get:
+      summary: "Pridobi (%length) stevilo vseh/mojih opravljenih opravil "
+      parameters:
+        - in: query
+          name: responsible
+          schema:
+            type: string
+            enum: [me, all]
+            default: all
+          
+          required: false
+          
+        - in: query
+          name: length
+          schema:
+            type: integer
+            default: 5
+          
+          required: false
+      responses:
+        '200': 
+          description:  'OK'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: 
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                        title:
+                          type: string
+                        duration:
+                          type: integer
+                        room:
+                          type: string
+            
+          
+  
+  /tasks/{task_id}/finish:
+    parameters:
+      - in: path
+        name: task_id
+        required: true
+        schema:
+          type: integer
+          
+    post:
+      summary: "Konca opravilo z task_id"
+      responses:
+        '200':
+          description: OK - Opravilo je bilo uspesno oznaceno kot zakljuceno
+        '401':
+          description: Uporabnik ni poslal JWT itd
+        '403':
+          description: Uporabnik ne more koncat opravila, ker je opravilo dodano enoti v kateri ni dodan
+        '404':
+          description: task z tem task_id ni bil najden
+        '500':
+          description: -||- tak ko pri ostalih 
+  
+  /units:
+    
+    get:
+      
+      summary: "Pridobitev vseh enot"
+      
+      responses:
+        
+        '200':
+          description: "Vse enote, ki so vezane za posameznega registriranega uporabnika"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        unit_id:
+                          type: integer
+                        unit_name:
+                          type: string
+                          default: "Ime bivalne enote"
+                        street:
+                          type: string
+                          default: "Naziv ceste"
+                        place:
+                          type: string
+                          default: "Naziv pošte"
+                        postal_code:
+                          type: integer
+                        country:
+                          type: string
+                          default: "Naziv države"
+                        pictures:
+                          type: array
+                          items:
+                            type: string
+                            example: ["Pot do slike 1", "Pot do slike 2", "Pot do slike 3"]
+                        roommates:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              name:
+                                type: string
+                                example: "Janez Oseba"
+                              usernmae:
+                                type: string
+                                example: "janez.oseba"
+                              avatar:
+                                type: string
+                                example: "./img/avatars/man-3.png"
+                        spaces:
+                          type: array
+                          items:
+                            type: string
+                            example: ["kuhinja", "kopalnica", "klet"]
+                              
+        '500':
+          description: "Napaka na strežniku"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                    default: "Napaka na strežniku. Prosimo, poskusite kasneje."
+  
+    post:
+    
+      summary: "Ustvarjanje nove enote"
+    
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                unit_name:
+                  type: string
+                  default: "Ime bivalne enote"
+                street:
+                  type: string
+                  default: "Naziv ceste"
+                place:
+                  type: string
+                  default: "Naziv pošte"
+                postal_code:
+                  type: integer
+                country:
+                  type: string
+                  default: "Naziv države"
+                rooms:
+                  type: array
+                  items:
+                    type: string
+                    example: ["Kuhinja", "Kopalnica", "Dvorišče"]
+                    description: "Nazivi prostorov v bivalni enoti"
+                pictures:
+                  type: array
+                  items:
+                    type: string
+                    example: ["Pot do slike 1", "Pot do slike 2", "Pot do slike 3"]
+        
+      
+      responses:
+        
+        '200':
+          description: "Uspešno dodajanje"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                    default: "Bivalna enota je uspešno dodana."
+        
+        '400':
+          description: "Napaka na odjemalcu"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                    default: "Prosimo, še enkrat vpišite podatke."
+        '500':
+          description: "Napaka na strežniku"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                    default: "Napaka na strežniku. Prosimo, poskusite kasneje."
+
+  /units/{unit_id}:
+    
+    get:
+    
+      summary: "Pridobitev specifične bivalne enote glede na id"
+    
+      parameters:
+        - name: unit_id
+          in: path
+          required: true
+          schema:
+            type: integer
+            
+      responses:
+        
+        '200':
+          description: "Posamezna bivalna enota"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: object
+                    properties:
+                        unit_id:
+                          type: integer
+                        unit_name:
+                          type: string
+                          default: "Ime bivalne enote"
+                        street:
+                          type: string
+                          default: "Naziv ceste"
+                        place:
+                          type: string
+                          default: "Naziv pošte"
+                        postal_code:
+                          type: integer
+                        country:
+                          type: string
+                          default: "Naziv države"
+                        pictures:
+                          type: array
+                          items:
+                            type: string
+                            example: ["Pot do slike 1", "Pot do slike 2", "Pot do slike 3"]
+                        roommates:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              name:
+                                type: string
+                                example: "Janez Oseba"
+                              usernmae:
+                                type: string
+                                example: "janez.oseba"
+                              avatar:
+                                type: string
+                                example: "./img/avatars/man-3.png"
+                        spaces:
+                          type: array
+                          items:
+                            type: string
+                            example: ["kuhinja", "kopalnica", "klet"]
+        
+        '401':
+          description: "JWT ni poslan"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                    default: "Ne morete dostopati do te bivalne enote."
+        
+        '404':
+          description: "Bivalna enota ni najdena"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                    default: "Žal nam je, bivalna enota, ki jo iščete, ni bila najdena."
+        
+        '500':
+          description: "Napaka na strežniku"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                    default: "Napaka na strežniku. Prosimo, poskusite kasneje."
+    
+    put:
+      
+      summary: "Posodobitev določene enote"
+      
+      parameters:
+        - name: unit_id
+          in: path
+          required: true
+          schema:
+            type: integer
+      
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                unit_name:
+                  type: string
+                  default: "Ime bivalne enote"
+                street:
+                  type: string
+                  default: "Naziv ceste"
+                place:
+                  type: string
+                  default: "Naziv pošte"
+                postal_code:
+                  type: integer
+                country:
+                  type: string
+                  default: "Naziv države"
+                rooms:
+                  type: array
+                  items:
+                    type: string
+                    example: ["Kuhinja", "Kopalnica", "Dvorišče"]
+                    
+      responses:
+        
+        '200':
+          description: "Uspešna posodobitev"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: object
+                    default: "Bivalna enota je uspešno posodobljena."
+        
+        '400':
+          description: "Napaka na odjemalcu"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                    default: "Prosimo, še enkrat vpišite podatke."
+        
+        '404':
+          description: "Bivalna enota ni najdena"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                    default: "Žal nam je, bivalna enota, ki jo iščete, ni bila najdena."
+        
+        '500':
+          description: "Napaka na strežniku"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                    default: "Napaka na strežniku. Prosimo, poskusite kasneje."
+
+    delete:
+      
+        summary: "Odstranitev bivalne enote"
+      
+        parameters:
+          - name: unit_id
+            in: path
+            required: true
+            schema:
+              type: integer
+          - name: username
+            in: path
+            required: true
+            schema:
+              type: string
+        
+        responses:
+          
+          '200':
+            description: "Odstranitev uspešna"
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    msg:
+                      type: string
+                      default: "Bivalna enota je uspešno odstranjena"
+                      
+          '401':
+            description: "JWT ni poslan."
+                      
+          '403':
+            description: "Uporabnik nima dostopa do odstranjevanja enote"
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    msg:
+                      type: string
+                      default: "Nimate dostopa za odstranitev enote."
+          
+          '404':
+            description: "Enota ni najdena"
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    msg:
+                      type: string
+                      default: "Žal nam je, ta enota ni najdena."
+          
+          '500':
+            description: "Napaka na strežniku"
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    msg:
+                      type: string
+                      default: "Napaka na strežniku. Prosimo, poskusite kasneje."
+
+
+  /units/{unit_id}/users:
+    
+    get:
+      
+      summary: "Pridobitev uporabnikov, prijavljenih na bivalno enoto"
+      
+      parameters:
+        - name: unit_id
+          in: path
+          required: true
+          schema:
+            type: integer
+      
+      responses:
+        
+        '200':
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        username:
+                          type: string
+                        name:
+                          type: string
+                        surname:
+                          type: string
+                          
+        '500':
+          description: "Napaka na strežniku"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                    default: "Napaka na strežniku. Prosimo, poskusite kasneje."
+  
+  
+  /units/{unit_id}/users/{username}:
+   
+    post:
+      
+      summary: "Dodajanje uporabnika na posamezno bivalno enoto"
+
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                  default: "username"
+                right:
+                  type: string
+                  default: "pravica"
+            
+      parameters:
+        - name: unit_id
+          in: path
+          required: true
+          schema:
+            type: integer
+        - name: username
+          in: path
+          required: true
+          schema:
+            type: string
+      
+      responses:
+        
+        '200':
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                    default: "Uporabnik je uspešno dodan."
+                    
+        '401':
+          description: "Uporabnik ni poslal JWT / JWT je potekel."
+                    
+        '403':
+          description: "Uporabnik nima dostopa do dodajanja uporabnikov"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                    default: "Nimate dostopa za dodajanje uporabnikov."
+        
+        '404':
+          description: "Enota ali uporabnik ni najden"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                    default: "Žal nam je, ta uporabnik / enota ni najdena."
+        
+        '500':
+          description: "Napaka na strežniku"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                    default: "Napaka na strežniku. Prosimo, poskusite kasneje."
+  
+  
+    delete:
+     
+      summary: "Odstranitev uporabnika iz enote"
+     
+      parameters:
+        - name: unit_id
+          in: path
+          required: true
+          schema:
+            type: integer
+        - name: username
+          in: path
+          required: true
+          schema:
+            type: string
+      
+      responses:
+        
+        '200':
+          description: "Odstranitev uspešna"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                    default: "Uporabnik je uspešno odstranjen"
+                    
+        '401':
+          description: "Uporabnik ni poslal JWT / JWT je potekel."
+                    
+        '403':
+          description: "Uporabnik nima dostopa do odstranjevanja uporabnikov"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                    default: "Nimate dostopa za odstranitev uporabnika."
+        
+        '404':
+          description: "Enota ali uporabnik ni najden"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                    default: "Žal nam je, ta uporabnik / enota ni najdena."
+        
+        '500':
+          description: "Napaka na strežniku"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                    default: "Napaka na strežniku. Prosimo, poskusite kasneje."
+
+        

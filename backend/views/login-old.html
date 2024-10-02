@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KdoDanesPospravlja.si - Login</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/stylePetelin.css"/>
+</head>
+<body>
+    <div id="wrap">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="/html/index.html">KdoDanesPospravlja.si</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="index.html">Domov</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="login.html">Prijavi se <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="register.html">Registracija</a>
+                </li>
+            </ul>
+        </div>
+        </nav>
+
+        <div class="container login-container">
+            <h2 class="text-center mb-3">Prijava v račun</h2>
+            <form>
+              <div class="form-group">
+                <label for="username">Uporabniško ime:</label>
+                <input type="username" class="form-control" id="username" placeholder="Vnesite uporabniško ime" required>
+              </div>
+              <div class="form-group">
+                <label for="pwd">Geslo:</label>
+                <input type="password" class="form-control" id="pwd" placeholder="Vnesite geslo" required>
+              </div>
+              <button type="submit" class="btn btn-block" style="background-color: #BFD8D2;">Prijava</button>
+            </form>
+        </div>
+    </div>
+    
+    <footer id="footer" class="text-center text-lg-start mt-5" style="border-radius: 15px; position: relative; padding-top: 50px;">
+        <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.1); font-size: medium; border-radius: 15px; box-shadow: inset 0 0 0 3px #BFD8D2;">
+          © 2024 KdoDanesPospravlja.si
+        </div>
+    </footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="js/login.js"></script>
+</body>
+</html>

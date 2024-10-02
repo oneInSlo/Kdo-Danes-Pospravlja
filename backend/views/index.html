@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DOBRODOŠLI - Kdo Danes Pospravlja?</title>
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
+    <link rel="shortcut icon" type="image/x-icon" href="./img/black-logo.png" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    />
+    <link rel="stylesheet" href="../css/style.css" />
+  </head>
+  <body>
+    <nav
+      class="navbar navbar-expand-lg fixed-top bg-white"
+      style="padding-left: 0"
+    >
+      <div class="container-fluid pr-0">
+        <a class="navbar-brand" href="index">
+          <img src="../img/black-logo.png" alt="logo" class="logo" id="logo" />
+          <span class="title">KdoDanesPospravlja</span>
+        </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarTogglerDemo02"
+          aria-controls="navbarTogglerDemo02"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0"></ul>
+          <div class="btn-group">
+            <button
+              type="button"
+              class="btn dropdown-toggle"
+              data-bs-toggle="dropdown"
+              data-bs-display="static"
+              aria-expanded="false"
+            >
+              <i class="bi bi-person"></i>
+            </button>
+            <ul class="dropdown-menu dropdown-menu-lg-end" id="login">
+              <li>
+                <a
+                  href="prijava-in-registracija"
+                  class="text-decoration-none"
+                  ><button class="dropdown-item" type="button">
+                    Prijava
+                  </button></a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container-fluid mt-5">
+      <div class="row banner p-5 bg-light-gray">
+        <div class="col-md-6 banner-text">
+          <h1 class="display-3 fw-bold">Obvladajte gospodinjsko upravljanje</h1>
+          <p class="lead mt-4 fs-4">
+            Organizirajte gospodinjska opravila v Vašem domu na preprost in
+            učinkovit način!
+          </p>
+          <a href="#cta" class="button-80 text-white bg-warm mt-3 px-5 fs-6"
+            >Poglej več</a
+          >
+        </div>
+        <div
+          class="col-md-6 banner-image d-flex justify-content-center align-items-center"
+        >
+          <img src="../img/banner.svg" alt="Banner Image" class="card-u" />
+        </div>
+      </div>
+    </div>
+
+    <div class="container py-5 my-5">
+      <div class="row justify-content-center">
+        <div class="col-md-8 text-center">
+          <h2 class="display-6 fw-bold mb-4">
+            Zakaj KdoDanesPospravlja<span class="text-warm">.si</span>?
+          </h2>
+        </div>
+      </div>
+      <div class="row justify-content-around mt-4">
+        <div class="col-md-4 mb-4 mb-md-0">
+          <div class="card h-100 border-0">
+            <div class="card-body text-center">
+              <lord-icon
+                src="https://cdn.lordicon.com/jdalicnn.json"
+                trigger="hover"
+                style="width: 50px; height: 50px"
+                colors="primary:#121331,secondary:#DF744A"
+              ></lord-icon>
+              <h4 class="card-title fw-bold text-warm">
+                Učinkovito Upravljanje Opravil
+              </h4>
+              <p class="card-text">
+                Naša aplikacija Vam omogoča enostavno dodajanje, urejanje in
+                spremljanje gospodinjskih opravil, kar vam prihrani čas in
+                energijo.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 mb-4 mb-md-0">
+          <div class="card h-100 border-0">
+            <div class="card-body text-center">
+              <lord-icon
+                src="https://cdn.lordicon.com/vhbyziek.json"
+                trigger="hover"
+                state="hover-pinch"
+                style="width: 50px; height: 50px"
+                colors="primary:#121331,secondary:#DF744A"
+              ></lord-icon>
+              <h4 class="card-title fw-bold text-warm">
+                Pravična Razdelitev Nalog
+              </h4>
+              <p class="card-text">
+                Z našo aplikacijo lahko pravično razdelite gospodinjska opravila
+                med vsemi stanovalci, kar pomaga ohranjati harmonijo v domu.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 mb-4 mb-md-0">
+          <div class="card h-100 border-0">
+            <div class="card-body text-center">
+              <lord-icon
+                src="https://cdn.lordicon.com/kndkiwmf.json"
+                trigger="hover"
+                state="hover-roll"
+                style="width: 50px; height: 50px"
+                colors="primary:#121331,secondary:#DF744A"
+              ></lord-icon>
+              <h4 class="card-title fw-bold text-warm">Dostop Od Koderkoli</h4>
+              <p class="card-text">
+                Naša aplikacija je popolnoma prilagodljiva in omogoča dostop od
+                kjerkoli, kar Vam daje svobodo upravljanja s svojimi opravili na
+                poti.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container-fluid" id="cta">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="container-content p-5">
+            <div class="row">
+              <div class="col-md-6 p-5 text-center">
+                <img
+                  src="../img/join.svg"
+                  alt="Left Image"
+                  class="img-fluid card-u"
+                  style="cursor: auto"
+                />
+              </div>
+              <div class="col-md-6 p-5">
+                <h2>
+                  Poenostavite svoje življenje, <br />
+                  ena naloga naenkrat.
+                </h2>
+                <p class="mt-4">
+                  Poslovite se od kaosa in pozdravite harmonijo z našo
+                  aplikacijo. Preprosto dodelite naloge, spremljajte dokončanje
+                  in uživajte v gladko vodenem gospodinjstvu. Pridružite se
+                  vrstam naših navdušenih uporabnikov, ki so si povrnili čas in
+                  mir.
+                </p>
+                <a href="prijava-in-registracija" class="button-80 bg-powder mt-1 px-5" >Pridruži se!</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container-fluid py-5 my-5">
+      <div class="row justify-content-center">
+        <div class="col-md-8 text-center">
+          <h2 class="display-6 fw-bold mb-4">
+            Podprte <span class="text-warm">funkcionalnosti</span>
+          </h2>
+        </div>
+      </div>
+      <div class="container mt-4">
+        <div class="row">
+          <div class="col-xl-3 col-sm-6">
+            <div class="card-u">
+              <img
+                src="../img/organize.svg"
+                alt="Organizacija Opravil"
+                class="img-p p-3"
+              />
+              <h5 class="card-title-u mt-3 mb-3 text-center">
+                Organizacija opravil
+              </h5>
+              <p class="card-text-p text-center">
+                Uporabniki si lahko z lahkoto organizirajo svoja opravila.
+              </p>
+            </div>
+          </div>
+          <div class="col-xl-3 col-sm-6">
+            <div class="card-u">
+              <img
+                src="../img/deal.svg"
+                alt="Upravljanje Opravil"
+                class="img-p p-3"
+              />
+              <h5 class="card-title-u mt-3 mb-3 text-center">
+                Upravljanje opravil
+              </h5>
+              <p class="card-text-p text-center">
+                Uporabniki lahko dodajajo, urejajo in brišejo gospodinjska
+                opravila.
+              </p>
+            </div>
+          </div>
+          <div class="col-xl-3 col-sm-6">
+            <div class="card-u">
+              <img
+                src="../img/houses.svg"
+                alt="Dodajanje Sostanovalcev"
+                class="img-p p-3"
+              />
+              <h5 class="card-title-u mt-3 mb-3 text-center">
+                Dodajanje sostanovalcev
+              </h5>
+              <p class="card-text-p text-center">
+                Uporabniki lahko v svojo bivalno enoto dodajo druge uporabnike.
+              </p>
+            </div>
+          </div>
+          <div class="col-xl-3 col-sm-6">
+            <div class="card-u">
+              <img src="../img/email.svg" alt="Opomniki" class="img-p p-3" />
+              <h5 class="card-title-u mt-3 mb-3 text-center">Opomniki</h5>
+              <p class="card-text-p text-center">
+                Uporabniki prejmejo opomnike za opravila preko e-pošte.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="container-content p-5">
+            <div class="text-center my-5 py-5">
+              <h2 class="display-4">
+                Pridružite se še danes in izkusite <br />
+                popolno mešanico preprostosti in učinkovitosti!
+              </h2>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer
+      id="footer"
+      class="text-center text-centered text-lg-start"
+      style="position: relative"
+    >
+      <div class="text-center text-centered p-3 fs-6">
+        © 2024 KdoDanesPospravlja.si
+      </div>
+    </footer>
+
+    <script src="../js/script.js"></script>
+    <script src="https://cdn.lordicon.com/lordicon.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"></script>
+  </body>
+</html>

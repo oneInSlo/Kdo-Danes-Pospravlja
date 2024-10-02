@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>OPRAVILA - KdoDanesPospravlja</title>
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
+    <link rel="shortcut icon" type="image/x-icon" href="./img/black-logo.png" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    />
+    <link rel="stylesheet" href="./css/style.css" />
+
+    <script type="module" src="js/opravila.js" defer></script>
+    <script src="js/clock.js" defer></script>
+  </head>
+  <body>
+    <nav
+      class="navbar navbar-expand-lg fixed-top bg-white"
+      style="padding-left: 0"
+    >
+      <div class="container-fluid pr-0">
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="offcanvas"
+          data-bs-target="#offcanvasScrolling"
+          aria-controls="offcanvasScrolling"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <a class="navbar-brand" href="index">
+          <img src="./img/black-logo.png" alt="logo" class="logo" id="logo" />
+          <span class="title">KdoDanesPospravlja</span>
+        </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarTogglerDemo02"
+          aria-controls="navbarTogglerDemo02"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="enote"
+                >Bivalne enote</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="opravila"
+                >Opravila</a
+              >
+            </li>
+          </ul>
+          <div class="btn-group">
+            <button
+              type="button"
+              class="btn dropdown-toggle"
+              data-bs-toggle="dropdown"
+              data-bs-display="static"
+              aria-expanded="false"
+            >
+              <i class="bi bi-person"></i>
+            </button>
+            <ul class="dropdown-menu dropdown-menu-lg-end" id="logout">
+              <li>
+                <button class="dropdown-item" type="button">Odjava</button>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <div>
+      <div
+        class="offcanvas offcanvas-start sidebar"
+        data-bs-scroll="true"
+        data-bs-backdrop="false"
+        tabindex="-1"
+        id="offcanvasScrolling"
+        aria-labelledby="offcanvasScrollingLabel"
+      >
+        <div class="offcanvas-header mt-2">
+          <h3>Upravljalec</h3>
+          <button
+            type="button"
+            class="btn-close disposable"
+            data-bs-dismiss="offcanvas"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="offcanvas-body mt-0 d-flex flex-column suggestion-container">
+          <nav class="navbar-dark flex-grow-1 d-flex flex-column">
+            <div class="overflow-auto flex-grow-1">
+              <ul class="navbar-nav">
+                <li>
+                  <a href="#" class="nav-link px-3 text-dark">
+                    <span class="me-2"><i class="bi bi-speedometer2"></i></span>
+                    <span>Pregled opravil</span>
+                  </a>
+                </li>
+                <hr />
+                <li>
+                  <a href="#enkratna" class="nav-link px-3 text-dark">
+                    <span class="me-2"><i class="bi bi-list-task"></i></span>
+                    <span>Enkratna opravila</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="#ponavljajoca-se" class="nav-link px-3 text-dark">
+                    <span class="me-2"><i class="bi bi-list-task"></i></span>
+                    <span>Ponavljajoča se opravila</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="#koncana" class="nav-link px-3 text-dark">
+                    <span class="me-2"><i class="bi bi-list-task"></i></span>
+                    <span>Končana opravila</span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+            <div class="mt-auto">
+              <img src="./img/teamwork.svg" alt="" class="teamwork-img" />
+            </div>
+          </nav>
+        </div>
+      </div>
+    </div>
+
+    <main class="mt-5 pt-5">
+      <div class="container-fluid">
+        <div class="container">
+          <div class="row d-flex justify-content-between align-items-center">
+            <div class="col-12">
+              <lord-icon
+                src="https://cdn.lordicon.com/wuvorxbv.json"
+                trigger="hover"
+                style="width: 50px; height: 50px"
+                colors="primary:#121331,secondary:#000"
+              ></lord-icon>
+              <h1 class="d-block display-3 fw-bold">Dnevna opravila</h1>
+              <div class="col-auto d-flex align-items-center">
+                <h4 class="text-secondary d-inline m-0 ms-1 display-6 fs-4">
+                  Pozdravljeni, <span id="greetingNameContainer"></span>.
+                </h4>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row mt-5">
+          <div class="col-md-12 mt-5">
+            <div class="card border-white bg-white">
+              <div class="card-header bg-powder fs-3 mx-3" id="formattedDate">Torek, 13. maj</div>
+              <div class="card-body card-body-set">
+                <div class="container-fluid">
+                  <div class="container">
+                    <div class="row">
+                      <div class="col-md-6 col-lg-6 mb-2">
+                        <div class="bg-light p-5 more-rounded h-100">
+                          <div class="row d-flex align-items-center">
+                            <div class="col-auto">
+                              <lord-icon
+                                src="https://cdn.lordicon.com/bjbmvfnr.json"
+                                trigger="hover"
+                                colors="primary:#121331,secondary:#000"
+                                style="width: 40px; height: 40px"
+                              >
+                              </lord-icon>
+                            </div>
+                            <div class="col-auto m-0 p-0">
+                              <h1 class="display-6 fs-3">Skrb za dom</h1>
+                            </div>
+                          </div>
+                          <hr />
+                          <p class="display-3 fs-6">
+                            Preprosta in učinkovita organizacija gospodinjskih
+                            opravil je tukaj! Lahko dodajate, urejate in
+                            spremljate vsa opravila v Vaši bivalni enoti. Ne
+                            glede na to, ali gre za enkratna opravila ali redno
+                            ponavljajoče se naloge, boste vedno imeli popoln
+                            pregled. Poskrbite, da bodo vsa opravila pravično
+                            razdeljena med sostanovalce, in se izognite
+                            nesporazumom ter stresu. Dodajte naloge, določite
+                            odgovorne osebe in sledite izvedbi – vse na enem
+                            mestu! Skupaj poskrbimo, da bo Vaš dom urejen in
+                            prijeten za bivanje. S pomočjo naše aplikacije lahko
+                            dosežete harmonijo in uživate v brezskrbnem
+                            sobivanju s sostanovalci.
+                          </p>
+                        </div>
+                      </div>
+                      <div class="col-md-6 col-lg-6 mb-2">
+                        <div class="row h-100">
+                          <div class="col-12 mb-2">
+                            <div
+                              class="bg-light mx-2 p-5 more-rounded h-100 d-flex align-items-center justify-content-center"
+                            >
+                              <svg
+                                id="clock"
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="180"
+                                height="180"
+                                viewBox="0 0 600 600"
+                              >
+                                <g id="face">
+                                  <circle
+                                    class="circle"
+                                    cx="300"
+                                    cy="300"
+                                    r="253.9"
+                                  />
+                                  <path
+                                    class="hour-marks"
+                                    d="M300.5 94V61M506 300.5h32M300.5 506v33M94 300.5H60M411.3 107.8l7.9-13.8M493 190.2l13-7.4M492.1 411.4l16.5 9.5M411 492.3l8.9 15.3M189 492.3l-9.2 15.9M107.7 411L93 419.5M107.5 189.3l-17.1-9.9M188.1 108.2l-9-15.6"
+                                  />
+                                  <circle
+                                    class="mid-circle"
+                                    cx="300"
+                                    cy="300"
+                                    r="16.2"
+                                  />
+                                </g>
+                                <g id="hour">
+                                  <path class="hour-arm" d="M300.5 298V142" />
+                                  <circle
+                                    class="sizing-box"
+                                    cx="300"
+                                    cy="300"
+                                    r="253.9"
+                                  />
+                                </g>
+                                <g id="minute">
+                                  <path class="minute-arm" d="M300.5 298V67" />
+                                  <circle
+                                    class="sizing-box"
+                                    cx="300"
+                                    cy="300"
+                                    r="253.9"
+                                  />
+                                </g>
+                                <g id="second">
+                                  <path class="second-arm" d="M300.5 350V55" />
+                                  <circle
+                                    class="sizing-box"
+                                    cx="300"
+                                    cy="300"
+                                    r="253.9"
+                                  />
+                                </g>
+                              </svg>
+                            </div>
+                          </div>
+                          <div class="col-12">
+                            <div
+                              class="bg-light mx-2 more-rounded h-100 d-flex align-items-center justify-content-center"
+                            >
+                              <p class="display-3 fs-4 mb-0">
+                                Enostavno do čistega doma.
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="image-card-container d-none d-lg-block mx-3">
+                  <img src="./img/tasks.svg" class="image-card task-image" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-5">
+        <div class="d-flex justify-content-between align-items-center">
+          <h3 class="display-6 fw-bold fs-2 ms-4 mb-2">Pregled opravil</h3>
+          <button
+            class="button-80 button-80-powder me-4 d-flex align-items-center"
+            id="addTaskButton"
+          >
+            <span>Ustvari opravilo</span>
+          </button>
+        </div>
+
+        <hr class="mx-4" />
+      </div>
+
+      <div class="container-fluid">
+        <div class="mx-4 mt-5">
+          <div class="row">
+            <div class="col-sm-11 mb-2">
+              <div>
+                <div class="input-group">
+                  <span class="input-group-text bg-pinkie" id="basic-addon3">
+                    <lord-icon
+                      src="https://cdn.lordicon.com/unukghxb.json"
+                      trigger="hover"
+                      colors="primary:#121331,secondary:#000"
+                      style="width: 30px; height: 30px"
+                    >
+                    </lord-icon>
+                  </span>
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Poišči opravilo"
+                    id="searchTaskFilter"
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-1 mb-2">
+              <div class="btn-group w-100 h-100">
+                <button
+                  type="button"
+                  class="btn dropdown-toggle"
+                  data-bs-toggle="dropdown"
+                  data-bs-display="static"
+                  aria-expanded="false"
+                >
+                  <i class="bi bi-funnel"></i>
+                </button>
+                <ul class="dropdown-menu dropdown-menu-end" style="right: 0">
+                  <li class="dropdown-header">Sortiraj:</li>
+                  <li>
+                    <button class="dropdown-item" type="button" id="sortTasksLatestFirstFilter">
+                      Najprej po datumu
+                    </button>
+                  </li>
+                  <li>
+                    <button class="dropdown-item" type="button" id="sortTasksOldestFirstFilter">
+                      Zadnje po datumu
+                    </button>
+                  </li>
+                  <li>
+                    <button class="dropdown-item" type="button" id="sortTasksAlphabeticalFilter">
+                      Abecedno
+                    </button>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="container-fluid">
+        <div class="d-flex justify-content-between align-items-center me-3 mt-3 mb-4">
+            <div class="btn-group ms-auto" role="group" aria-label="Show my tasks only">
+                <input type="checkbox" class="btn-check" id="onlyMyTasks" autocomplete="off">
+                <label class="btn btn-outline-primary" for="onlyMyTasks">Prikaži samo moja opravila</label>
+            </div>
+        </div>
+      </div>
+    
+
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-4" id="enkratna">
+            <div class="fw-bold p-3 rounded bg-light mx-4 title-container">
+              <span class="display-6 fs-5 fw-bold title-text">ENKRATNA OPRAVILA</span>
+            </div>
+            <div class="container-fluid rounded p-2">
+              <div
+                class="container-fluid rounded p-2"
+                id="oneTimeTasksContainer"
+              ></div>
+            </div>
+          </div>
+          <div class="col-md-4" id="ponavljajoca-se">
+            <div class="fw-bold p-3 rounded bg-light mx-4 title-container">
+              <span class="display-6 fs-5 fw-bold title-text">PONAVLJAJOČA SE OPRAVILA</span>
+              <div class="btn-group d-flex align-items-center mt-3 title-buttons" role="group" aria-label="Radio toggle button group">
+                  <input type="radio" class="btn-check btnRadioChange form-control todogeneric" name="radiobtngroup" id="generic" autocomplete="off">
+                  <label class="btn btn-outline-primary" for="generic">Splošna</label>
+
+                  <input type="radio" class="btn-check btnRadioChange form-control todogeneric" name="radiobtngroup" id="todo" autocomplete="off">
+                  <label class="btn btn-outline-primary" for="todo">To-Do</label>
+              </div>
+            </div>
+            <div class="container-fluid rounded p-2">
+              <div
+                class="container-fluid rounded p-2"
+                id="repeatingTasksContainer"
+              >
+                <div class="container-fluid rounded p-2 mt-4">
+                  <div
+                    class="card border-secondary-subtle"
+                    data-bs-toggle="modal"
+                    data-bs-target="#dodajnovoopravilo2"
+                  >
+                    <button class="btn card-body">
+                      <div class="text-dark">
+                        <h6 class="card-title fs-6 mt-2">
+                          Dodaj novo opravilo
+                        </h6>
+                      </div>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4" id="koncana">
+            <div class="fw-bold p-3 rounded bg-light mx-4 title-container">
+              <span class="display-6 fs-5 fw-bold title-text">KONČANA OPRAVILA</span>
+            </div>
+            <div class="container-fluid rounded p-2">
+              <div
+                class="container-fluid rounded p-2"
+                id="finishedTasksContainer"
+              >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <footer
+        id="footer"
+        class="text-center text-centered text-lg-start"
+        style="position: relative; padding-top: 50px"
+      >
+        <div
+          class="text-center text-centered p-3 border border-"
+          style="background-color: rgba(0, 0, 0, 0.1); font-size: medium"
+        >
+          © 2024 KdoDanesPospravlja.si
+        </div>
+      </footer>
+    </main>
+
+    <!-- MODALS -->
+    <div class="modal fade" id="addTaskModal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header bg-powder">
+            <h1 class="modal-title fs-5" id="dodajsplosnolabel">
+              Dodajanje novega opravila
+            </h1>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <p>Katero opravilo želite dodati?</p>
+            <div class="row">
+              <div class="col-xl-6">
+                <button
+                  class="button-80 bg-powder w-100 mt-2"
+                  data-bs-toggle="modal"
+                  id="createOneTimeTaskButton"
+                >
+                  Enkratno opravilo
+                </button>
+              </div>
+              <div class="col-xl-6">
+                <button
+                  class="button-80 bg-powder w-100 mt-2"
+                  data-bs-toggle="modal"
+                  id="createRepeatingTaskButton"
+                >
+                  Ponavljajoče se opravilo
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.lordicon.com/lordicon.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
+  </body>
+</html>

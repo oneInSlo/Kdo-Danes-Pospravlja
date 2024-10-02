@@ -1,0 +1,3 @@
+node_modules
+backend/public/img/enote/*
+!backend/public/img/enote/.gitkeep
