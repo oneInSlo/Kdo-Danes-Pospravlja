@@ -1,21 +1,33 @@
-# KdoDanesPospravlja.si
+<div align="center">
+
+  <img src="./backend/public/img/white-logo.png" alt="logo" width="80" height="auto" />
+  
+  <h1> KdoDanesPospravlja.si </h1>
+  
+  <p>
+    Effortless Chore Management for Shared Spaces.
+  </p>
+
+</div>
+
+<br>
 
 **KdoDanesPospravlja.si** is a web application designed to help roommates living in student dormitories or shared apartments organize and distribute household chores efficiently. The application ensures fair task allocation and tracks task completion through an intuitive interface, allowing users to manage responsibilities across shared living spaces.
 
 
-## Features
+## ✨ Features
 
-- **User Registration & Login**: Users must register and log in to access the app's functionality.
-- **Household Management**: Users can create and manage living units, including adding roommates with either full or limited permissions.
-- **Living Unit Map View**: Living units are displayed on a map, with a clickable pin that shows the name, location, and an image of the unit.
-- **Task Management**: Users can add, edit, and delete tasks. Tasks can be one-time or recurring (daily, weekly, monthly, yearly).
-- **Automated Task Rotation**: For recurring tasks, responsibilities can be rotated automatically among the assigned roommates.
-- **Task Reminders**: Users responsible for tasks receive email reminders on the scheduled date.
-- **Task Status Indicators**: The top border color of each task changes based on the task’s end date to indicate its status.
-- **Overview and Sorting**: View and sort tasks for each living unit by different parameters such as date, task type, and room.
+- 🔐 **User Registration & Login**: Users must register and log in to access the app's functionality.
+- 🏡 **Household Management**: Users can create and manage living units, including adding roommates with either full or limited permissions.
+- 🗺️ **Living Unit Map View**: Living units are displayed on a map, with a clickable pin that shows the name, location, and an image of the unit.
+- ✅ **Task Management**: Users can add, edit, and delete tasks. Tasks can be one-time or recurring (daily, weekly, monthly, yearly).
+- 🔄 **Automated Task Rotation**: For recurring tasks, responsibilities can be rotated automatically among the assigned roommates.
+- ⏰ **Task Reminders**: Users responsible for tasks receive email reminders on the scheduled date.
+- 🎨 **Task Status Indicators**: The top border color of each task changes based on the task’s end date to indicate its status.
+- 📅 **Overview and Sorting**: View and sort tasks for each living unit by different parameters such as date, task type, and room.
 
 
-## Installation
+## 🛠️ Installation
 
 To set up and run this project locally, follow the steps below:
 
@@ -46,12 +58,12 @@ To set up and run this project locally, follow the steps below:
 6. Access the application through `localhost` and start adding users, tasks, and managing your household!
 
 
-## Technologies Used
+## ⚙️ Technologies Used
 
 [![HTML][HTML-shield]][HTML-url] [![CSS][CSS-shield]][CSS-url] [![Bootstrap][Bootstrap-shield]][Bootstrap-url] [![JavaScript][JavaScript-shield]][JavaScript-url] [![Node.js][Node.js-shield]][Node.js-url] [![SQL][SQL-shield]][SQL-url] [![OpenStreetMap][OpenStreetMap-shield]][OpenStreetMap-url]
 
 
-## Team Members
+## 👥 Team Members
 
 - Neo Xander Kirbiš
 - Gal Petelin
@@ -60,25 +72,36 @@ To set up and run this project locally, follow the steps below:
 - Ena Imamović
 
 
-## Screenshots
+## 📸 Screenshots
 
-### Landing Page
-![Landing Page](./screenshots/landing-page.png)
+### 🖼️ Landing Page
+<div align="center">
+  <img src="./screenshots/landing-page.png" alt="Landing Page" width="80%" />
+</div>
 
-### Living Units
-![Living Units 01](./screenshots/bivalne-enote-01.png)
-![Living Units 02](./screenshots/bivalne-enote-02.png)
-![Living Units 03](./screenshots/bivalne-enote-03.png)
+### 🏘️ Living Units
+<div align="center">
+  <img src="./screenshots/bivalne-enote-01.png" alt="Living Units 01" width="80%" />
+</div>
+<div align="center">
+  <img src="./screenshots/bivalne-enote-02.png" alt="Living Units 02" width="80%" />
+</div>
+<div align="center">
+  <img src="./screenshots/bivalne-enote-03.png" alt="Living Units 03" width="80%" />
+</div>
 
-### Tasks
-![Tasks 01](./screenshots/opravila-01.png)
-![Tasks 02](./screenshots/opravila-02.png)
+### 📝 Tasks
+<div align="center">
+  <img src="./screenshots/opravila-01.png" alt="Tasks 01" width="80%" />
+</div>
+<div align="center">
+  <img src="./screenshots/opravila-02.png" alt="Tasks 02" width="80%" />
+</div>
 
 
-## License
+## 📄 License
 
 Distributed under the MIT License. See `LICENSE.txt` for more information.
-
 
 [HTML-shield]: https://img.shields.io/badge/HTML-E34F26?style=for-the-badge&logo=html5&logoColor=white
 [HTML-url]: https://developer.mozilla.org/en-US/docs/Web/HTML
